@@ -1,0 +1,91 @@
+#cluster.name: "docker-cluster"
+#network.host: 0.0.0.0
+
+
+################################### Cluster ###################################
+cluster.name: ${CLUSTER_NAME}
+
+
+################################### Node ###################################
+node.master: ${NODE_MASTER}
+node.data: ${NODE_DATA}
+# node.local: ${NODE_LOCAL}
+node.ingest: ${NODE_INGEST}
+
+network.host: ${NETWORK_HOST}
+
+#################################### Paths ####################################
+path.data: ${PATH_DATA}/data
+path.logs: ${PATH_DATA}/log
+# path.work: ${PATH_DATA}/work
+# path.plugins: /elasticsearch/plugins
+
+################################### Memory ####################################
+# ElasticSearch performs poorly when JVM starts swapping: you should ensure that
+# it _never_ swaps.
+#
+# Set this property to true to lock the memory:
+#
+#bootstrap.mlockall: true
+bootstrap.memory_lock: ${MEMORY_LOCK}
+
+############################## Network And HTTP ###############################
+# ElasticSearch, by default, binds itself to the 0.0.0.0 address, and listens
+# on port [9200-9300] for HTTP traffic and on port [9300-9400] for node-to-node
+# communication. (the range means that if the port is busy, it will automatically
+# try the next port).
+# http.enabled: ${HTTP_ENABLE}
+#transport.tcp.compress: true
+http.compression: true
+
+
+################################## Discovery ##################################
+discovery.zen.minimum_master_nodes: ${NUMBER_OF_MASTERS}
+cloud.kubernetes.service: ${DISCOVERY_SERVICE}
+cloud.kubernetes.namespace: ${NAMESPACE}
+# discovery.type: kubernetes
+
+#################################### Index ####################################
+# index.number_of_shards: ${NUMBER_OF_SHARDS}
+# index.number_of_replicas: ${NUMBER_OF_REPLICAS}
+
+#################################### XPACK ####################################
+xpack.security.enabled: ${XPACK_SECURITY_ENABLE}
+#xpack.security.transport.ssl.enabled: ${XPACK_SECURITY_TRANSPORT_SSL_ENABLE}
+#xpack.security.http.ssl.enabled: ${XPACK_SECURITY_HTTP_SSL_ENABLE}
+#xpack.security.transport.ssl.verification_mode: certificate
+xpack.security.audit.enabled: ${XPACK_SECURITY_AUDIT_ENABLE}
+#xpack.security.audit.outputs: ${XPACK_SECURITY_AUDIT_OUTPUTS}
+#xpack.ssl.key: ${XPACK_SSL_KEY_PATH}
+#xpack.ssl.certificate: ${XPACK_SSL_CERT_PATH}
+#xpack.ssl.certificate_authorities: [ "${XPACK_SSL_CA_CERT_PATH}" ]
+xpack.monitoring.enabled: ${XPACK_MONITORING_ENABLE}
+xpack.ml.enabled: ${XPACK_ML_ENABLE}
+xpack.watcher.enabled: ${XPACK_WATCHER_ENABLE}
+
+#################################### NOTIFICATION XPACK ####################################
+#xpack.notification.email.account.ses_account.email_defaults.from: ${XPACK_EMAIL_DEFAULTS_FROM}
+#xpack.notification.email.account.ses_account.smtp.auth: ${XPACK_EMAIL_SMTP_AUTH}
+#xpack.notification.email.account.ses_account.smtp.starttls.enable: ${XPACK_EMAIL_SMTP_STARTTLS_ENABLE}
+#xpack.notification.email.account.ses_account.smtp.starttls.required: ${XPACK_EMAIL_SMTP_STARTTLS_REQUIRED}
+#xpack.notification.email.account.ses_account.smtp.host: ${XPACK_EMAIL_SMTP_HOST}
+#xpack.notification.email.account.ses_account.smtp.port: ${XPACK_EMAIL_SMTP_PORT}
+#xpack.notification.email.account.ses_account.smtp.user: ${XPACK_EMAIL_SMTP_USER}
+#xpack.notification.email.account.ses_account.smtp.password: ${XPACK_EMAIL_SMTP_PASS}
+
+#################################### WATCHER XPACK ####################################
+xpack.notification.slack:
+  account:
+    monitoring:
+      # secure_url: ${URL_SLACK_MONITOR_HOOK}
+      message_defaults:
+        from: x-pack
+        to: notifications
+        icon: https://pbs.twimg.com/profile_images/766411362440323072/rI2LGExV_400x400.jpg
+        # attachment:
+        #   fallback: "X-Pack Notification"
+        #   color: "#36a64f"
+        #   title: "X-Pack Notification"
+        #   title_link: "https://www.elastic.co/guide/en/x-pack/current/index.html"
+        #   text: "One of your watches generated this notification."
+        #   mrkdwn_in: "pretext, text"
