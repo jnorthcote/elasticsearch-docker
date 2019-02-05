@@ -41,9 +41,9 @@ http.compression: true
 
 ################################## Discovery ##################################
 discovery.zen.minimum_master_nodes: ${NUMBER_OF_MASTERS}
-# cloud.k8s.service: ${DISCOVERY_SERVICE}
-# cloud.k8s.namespace: ${NAMESPACE}
-discovery.type: kubernetes
+# cloud.kubernetes.service: ${DISCOVERY_SERVICE}
+# cloud.kubernetes.namespace: ${NAMESPACE}
+discovery.zen.hosts_provider: kubernetes
 
 #################################### Index ####################################
 # index.number_of_shards: ${NUMBER_OF_SHARDS}
