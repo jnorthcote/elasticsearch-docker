@@ -69,13 +69,6 @@ export NODE_NAME=${NODE_NAME}
 # rm -rf /elasticsearch/modules/x-pack/x-pack-ml
 # rm -rf /elasticsearch/modules/x-pack-ml
 
-
-# Create keystore for secure_url etc.
-echo "Keystore creation for secure_url"
-"${BASE}"/bin/elasticsearch-keystore create
-echo "${XPACK_SECURE_URL_SLACK}" | $BASE/bin/elasticsearch-keystore add --stdin xpack.notification.slack.account.monitoring.secure_url
-
-
 # Run
 if [[ $(whoami) == "root" ]]; then
     if [ ! -d "/data/data/nodes/0" ]; then
@@ -89,6 +82,11 @@ if [[ $(whoami) == "root" ]]; then
 
     # Create keystore for secure_url etc.
     # exec su -c "${BASE}"/bin/elasticsearch-keystore create
+    
+    # Create keystore for secure_url etc.
+    echo "Keystore creation for secure_url"
+    "${BASE}"/bin/elasticsearch-keystore create
+    echo "${XPACK_SECURE_URL_SLACK}" | $BASE/bin/elasticsearch-keystore add --stdin xpack.notification.slack.account.monitoring.secure_url
 
     exec su -c $BASE/bin/elasticsearch elasticsearch $ES_EXTRA_ARGS
 else
