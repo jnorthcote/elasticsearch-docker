@@ -42,7 +42,7 @@ http.compression: true
 ################################## Discovery ##################################
 discovery.zen.minimum_master_nodes: ${NUMBER_OF_MASTERS}
 # cloud.kubernetes.service: ${DISCOVERY_SERVICE}
-cloud.kubernetes.namespace: ${NAMESPACE}
+# cloud.kubernetes.namespace: ${NAMESPACE}
 # discovery.type: kubernetes
 
 #################################### Index ####################################
