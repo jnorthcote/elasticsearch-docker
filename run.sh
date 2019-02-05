@@ -78,15 +78,12 @@ if [[ $(whoami) == "root" ]]; then
         echo "Changing ownership of ${ES_TMPDIR} folder"
         chmod -R a+w ${ES_TMPDIR}
         chown -R elasticsearch:elasticsearch ${ES_TMPDIR}
+        
+        # Create keystore for secure_url etc.
+        echo "Keystore creation for secure_url"
+        "${BASE}"/bin/elasticsearch-keystore create
+        echo "${XPACK_SECURE_URL_SLACK}" | $BASE/bin/elasticsearch-keystore add --stdin xpack.notification.slack.account.monitoring.secure_url
     fi
-
-    # Create keystore for secure_url etc.
-    # exec su -c "${BASE}"/bin/elasticsearch-keystore create
-    
-    # Create keystore for secure_url etc.
-    echo "Keystore creation for secure_url"
-    "${BASE}"/bin/elasticsearch-keystore create
-    echo "${XPACK_SECURE_URL_SLACK}" | $BASE/bin/elasticsearch-keystore add --stdin xpack.notification.slack.account.monitoring.secure_url
 
     exec su -c $BASE/bin/elasticsearch elasticsearch $ES_EXTRA_ARGS
 else
