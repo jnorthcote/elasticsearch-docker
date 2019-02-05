@@ -43,7 +43,7 @@ http.compression: true
 discovery.zen.minimum_master_nodes: ${NUMBER_OF_MASTERS}
 # cloud.kubernetes.service: ${DISCOVERY_SERVICE}
 # cloud.kubernetes.namespace: ${NAMESPACE}
-discovery.zen.hosts_provider: kubernetes
+discovery.zen.ping.unicast.hosts: kubernetes
 
 #################################### Index ####################################
 # index.number_of_shards: ${NUMBER_OF_SHARDS}
