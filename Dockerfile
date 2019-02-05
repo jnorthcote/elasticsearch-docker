@@ -88,6 +88,6 @@ ENV NAMESPACE ""
 ENV DISCOVERY_SERVICE ""
 
 # Volume for Elasticsearch data
-VOLUME ["/data", "/tmp"]
+VOLUME ["/data"]
 
 CMD ["/run.sh"]

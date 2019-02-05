@@ -1,5 +1,5 @@
-#cluster.name: "docker-cluster"
-#network.host: 0.0.0.0
+# cluster.name: "docker-cluster"
+network.host: 0.0.0.0
 
 
 ################################### Cluster ###################################
@@ -40,10 +40,12 @@ http.compression: true
 
 
 ################################## Discovery ##################################
-discovery.zen.minimum_master_nodes: ${NUMBER_OF_MASTERS}
+discovery.zen:
+  minimum_master_nodes: ${NUMBER_OF_MASTERS}
+  ping.unicast.hosts: elasticsearch
+plugin.mandatory: discovery-kubernetes
 # cloud.kubernetes.service: ${DISCOVERY_SERVICE}
 # cloud.kubernetes.namespace: ${NAMESPACE}
-discovery.zen.ping.unicast.hosts: ${DISCOVERY_SERVICE}
 
 #################################### Index ####################################
 # index.number_of_shards: ${NUMBER_OF_SHARDS}
