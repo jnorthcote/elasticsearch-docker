@@ -1,10 +1,10 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:6.6.0
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.17.10
 MAINTAINER yeung.herbert@gmail.com
 
 # Export HTTP & Transport
 EXPOSE 9200 9300
 
-ENV ES_VERSION 6.6.0
+ENV ES_VERSION 7.17.10
 
 # ENV DOWNLOAD_URL "https://artifacts.elastic.co/downloads/elasticsearch"
 # ENV ES_TARBAL "${DOWNLOAD_URL}/elasticsearch-${ES_VERSION}.tar.gz"
